@@ -34,8 +34,6 @@ class create_quotation_from_products(osv.osv):
     _columns = {
         'partner_id': fields.many2one('res.partner', 'Customer', required=True),
         'product_qty': fields.integer('Product quantity', required=True),
-        'supplier_id': fields.many2one('res.partner', 'Supplier', required=True),
-        
                 }
     _defaults = {
         'product_qty': lambda *a: 1,
@@ -113,9 +111,24 @@ class create_quotation_from_products(osv.osv):
         return {
                 'type': 'ir.actions.act_window_close',
         }
+        
+create_quotation_from_products()
 
+class create_purchase_quotation_from_products(osv.osv):
+    _name = "product.create.purchase.quotation"
+    _description = "Create purchase quotation from selected products"
+    
+    _columns = {
+        'product_qty': fields.integer('Product quantity', required=True),
+        'supplier_id': fields.many2one('res.partner', 'Supplier', required=True),        
+    }
+    
+    _defaults = {
+        'product_qty': lambda *a: 1,
+    }
+    
     def create_purchase_quotation(self, cr, uid, ids, context=None):
         logger.log(logging.INFO, "create_purchase_quotation")
         return True
         
-create_quotation_from_products()
+create_purchase_quotation_from_products()

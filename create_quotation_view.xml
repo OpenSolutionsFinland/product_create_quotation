@@ -55,7 +55,7 @@
          
 	        <act_window name="Create purchase quotation"
 	            context="{'search_default_draft': 1, 'search_default_approved': False}"
-	            res_model="product.create.quotation"
+	            res_model="product.create.purchase.quotation"
 	            src_model="product.product"
 				view_id="view_create_purchase_quotation"
 	            view_mode="form"
