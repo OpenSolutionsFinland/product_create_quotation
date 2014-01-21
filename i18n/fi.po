@@ -1,0 +1,74 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* product_create_quotation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0-20131203-002409\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-21 09:31+0000\n"
+"PO-Revision-Date: 2014-01-21 11:33+0200\n"
+"Last-Translator: Jesse Vartiainen <jesse@opensolutions.fi>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.7\n"
+
+#. module: product_create_quotation
+#: field:product.create.quotation,partner_id:0
+msgid "Customer"
+msgstr "Asiakas"
+
+#. module: product_create_quotation
+#: model:ir.model,name:product_create_quotation.model_product_create_quotation
+#: view:product.create.purchase.quotation:0 view:product.create.quotation:0
+msgid "Create quotation from selected products"
+msgstr "Tee tarjous valituista tuotteista"
+
+#. module: product_create_quotation
+#: view:product.create.purchase.quotation:0 view:product.create.quotation:0
+msgid "Create"
+msgstr "Luo"
+
+#. module: product_create_quotation
+#: view:product.create.purchase.quotation:0 view:product.create.quotation:0
+msgid "Please select quantity per product"
+msgstr "Valitse tuotemäärä"
+
+#. module: product_create_quotation
+#: model:ir.actions.act_window,name:product_create_quotation.action_product_create_purchase_quotation
+msgid "Create purchase quotation"
+msgstr "Luo ostotarjous"
+
+#. module: product_create_quotation
+#: field:product.create.purchase.quotation,product_qty:0
+#: field:product.create.quotation,product_qty:0
+msgid "Product quantity"
+msgstr "Tuotemäärä"
+
+#. module: product_create_quotation
+#: field:product.create.purchase.quotation,supplier_id:0
+msgid "Supplier"
+msgstr "Toimittaja"
+
+#. module: product_create_quotation
+#: model:ir.actions.act_window,name:product_create_quotation.action_product_create_quotation
+msgid "Create quotation"
+msgstr "Luo tarjous"
+
+#. module: product_create_quotation
+#: model:ir.model,name:product_create_quotation.model_product_create_purchase_quotation
+msgid "Create purchase quotation from selected products"
+msgstr "Luo ostotarjous valituista tuotteista"
+
+#. module: product_create_quotation
+#: view:product.create.purchase.quotation:0 view:product.create.quotation:0
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: product_create_quotation
+#: view:product.create.purchase.quotation:0 view:product.create.quotation:0
+msgid "or"
+msgstr "tai"
