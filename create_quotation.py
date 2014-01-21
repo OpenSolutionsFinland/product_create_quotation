@@ -185,7 +185,7 @@ class create_purchase_quotation_from_products(osv.osv):
         vals['currency_id'] = company.currency_id.id
         vals['invoice_method'] = 'picking'
         vals['location_id'] = self.pool.get('stock.warehouse').browse(cr, uid, 1, context=context).lot_input_id.id
-        
+        vals['pricelist_id'] = 1
         '''
         vals['message_follower_ids'] = False
         
