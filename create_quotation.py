@@ -184,7 +184,7 @@ class create_purchase_quotation_from_products(osv.osv):
         vals['date_order'] = datetime.now().strftime("%Y-%m-%d")
         vals['currency_id'] = company.currency_id.id
         vals['invoice_method'] = 'picking'
-        vals['location_id'] = self.pool.get('stock.warehouse').browse(cr, uid, [], context=context)[0].id
+        vals['location_id'] = self.pool.get('stock.warehouse').browse(cr, uid, 1, context=context).id
         
         '''
         vals['message_follower_ids'] = False
