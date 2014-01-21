@@ -23,12 +23,19 @@ from osv import fields, osv
 from datetime import datetime
 from tools.translate import _
 
-class create_quotation_from_products(osv.osv_memory):
+import logging
+
+logger = logging.getLogger(__name__)
+
+class create_quotation_from_products(osv.osv):
     _name = "product.create.quotation"
     _description = "Create quotation from selected products"
+    
     _columns = {
         'partner_id': fields.many2one('res.partner', 'Customer', required=True),
         'product_qty': fields.integer('Product quantity', required=True),
+        'supplier_id': fields.many2one('res.partner', 'Supplier', required=True),
+        
                 }
     _defaults = {
         'product_qty': lambda *a: 1,
@@ -102,12 +109,13 @@ class create_quotation_from_products(osv.osv_memory):
         
         
         sale_obj.create(cr, uid, vals, context=context)
-        
-        
-        
-        
+
         return {
                 'type': 'ir.actions.act_window_close',
         }
-    
+
+    def create_purchase_quotation(self, cr, uid, ids, context=None):
+        logger.log(logging.INFO, "create_purchase_quotation")
+        return True
+        
 create_quotation_from_products()
