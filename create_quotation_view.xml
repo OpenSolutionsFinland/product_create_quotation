@@ -24,7 +24,7 @@
 		
         <record id="view_create_purchase_quotation" model="ir.ui.view">
             <field name="name">Create purchase from selected products </field>
-            <field name="model">product.create.quotation</field>
+            <field name="model">product.create.purchase.quotation</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                <form string="Create quotation from selected products" version="7.0">
