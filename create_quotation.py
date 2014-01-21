@@ -129,6 +129,93 @@ class create_purchase_quotation_from_products(osv.osv):
     
     def create_purchase_quotation(self, cr, uid, ids, context=None):
         logger.log(logging.INFO, "create_purchase_quotation")
-        return True
+        
+        if context is None:
+            context={}
+            
+        product_obj = self.pool.get('product.product')
+        purchase_obj = self.pool.get('purchase.order')
+        company = self.pool.get('res.company').browse(cr, uid, 1, context=context)
+        active_ids = context.get('active_ids',[])
+        product_qty = self.browse(cr,uid,ids)[0]['product_qty']
+        partner_id = self.browse(cr,uid,ids)[0]['supplier_id']
+        
+        order_lines = []
+        #Se sprehodimo po izbranih produktih in izdelujemo dictionary
+        for prod in product_obj.browse(cr, uid, active_ids, context=context):
+            vals_lines = {}
+            '''
+            vals_lines['product_uos_qty'] = product_qty
+            vals_lines['product_id'] = prod.id
+            vals_lines['product_uom'] = prod.uom_id.id
+            vals_lines['discount'] = 0
+            vals_lines['price_unit'] = prod.list_price
+            vals_lines['product_uom_qty'] = product_qty
+            vals_lines['delay'] = prod.produce_delay
+            vals_lines['product_uos'] = prod.uos_id.id
+            vals_lines['th_weight'] = 0
+            vals_lines['product_packaging'] = False
+            vals_lines['tax_id'] = False
+            vals_lines['type'] = prod.procure_method
+            '''
+            vals_lines['product_id'] = prod.id
+            vals_lines['price_unit'] = 0.0
+            vals_lines['date_planned'] = datetime.now().strftime("%Y-%m-%d")
+            vals_lines['product_qty'] = product_qty
+            vals_lines['product_uom'] = prod.uom_id.id
+            #vals_lines['state'] = 'draft'
+            
+            product_name = ''
+            if prod.variants:
+                product_name = '[' + prod.code + ']' + ' ' + prod.name + ' - ' + prod.variants
+            else:
+                product_name = '[' + prod.code + ']' + ' ' + prod.name
+            vals_lines['name'] = product_name
+            
+            tmp_list = [0, False, vals_lines]
+            order_lines.append(tmp_list)
+        
+        
+        vals= {}
+        vals['company_id'] = company.id
+        vals['order_line'] = order_lines
+        vals['date_order'] = datetime.now().strftime("%Y-%m-%d")
+        vals['currency_id'] = company.currency_id.id
+        vals['invoice_method'] = 'picking'
+        #vals['location_id'] = 
+        
+        '''
+        vals['message_follower_ids'] = False
+        
+        vals['order_line'] = order_lines
+        
+        vals['picking_policy'] = 'direct'
+        vals['order_policy'] = 'picking'
+        vals['invoice_quantity'] = 'procurement'
+        vals['client_order_ref'] = False
+        vals['date_order'] = datetime.now().strftime("%Y-%m-%d")
+        vals['partner_id'] = partner_id.id
+        
+        vals['message_ids'] = False
+        vals['fiscal_position'] = 1
+        vals['user_id'] = 1
+        vals['payment_term'] = 2
+        vals['note'] = False
+        vals['clause_ids'] = [[6, False, []]]
+        vals['pricelist_id'] = 1
+        vals['project_id'] = False
+        vals['incoterm'] = False
+        
+        vals['partner_invoice_id'] = partner_id.id
+        vals['invoice_type_id'] = 2
+        vals['partner_shipping_id'] = partner_id.id
+        vals['shop_id'] = 1
+        '''
+        
+        purchase_obj.create(cr, uid, vals, context=context)
+
+        return {
+                'type': 'ir.actions.act_window_close',
+        }
         
 create_purchase_quotation_from_products()
