@@ -139,6 +139,7 @@ class create_purchase_quotation_from_products(osv.osv):
         active_ids = context.get('active_ids',[])
         product_qty = self.browse(cr,uid,ids)[0]['product_qty']
         partner_id = self.browse(cr,uid,ids)[0]['supplier_id']
+        logger.log(logging.INFO, 'selected partner: ' + partner_id.name)
         
         order_lines = []
         #Se sprehodimo po izbranih produktih in izdelujemo dictionary
@@ -177,6 +178,7 @@ class create_purchase_quotation_from_products(osv.osv):
         
         
         vals= {}
+        vals['partner_id'] = partner_id.id
         vals['company_id'] = company.id
         vals['order_line'] = order_lines
         vals['date_order'] = datetime.now().strftime("%Y-%m-%d")
@@ -212,8 +214,10 @@ class create_purchase_quotation_from_products(osv.osv):
         vals['shop_id'] = 1
         '''
         
-        purchase_obj.create(cr, uid, vals, context=context)
-
+        newID = purchase_obj.create(cr, uid, vals, context=context)
+        
+        logger.log(logging.INFO, 'created rfq id ' + str(newID))
+        
         return {
                 'type': 'ir.actions.act_window_close',
         }
