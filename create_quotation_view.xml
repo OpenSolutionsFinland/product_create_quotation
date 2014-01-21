@@ -30,7 +30,8 @@
                <form string="Create quotation from selected products" version="7.0">
                		<group>
                     	<separator string="Please select quantity per product" colspan="4"/>
-                    	<field name="supplier_id" colspan="2" domain="[(supplier_id.supplier, '=', True)]"/>
+						<!--<field name="is_supplier" invisible="1" /> -->
+                    	<field name="supplier_id" colspan="2" domain="[('supplier_id.supplier', '=', 'true')]"/>
                     	<field name="product_qty" colspan="2"/>
                     	<separator string="" colspan="4" />
                     </group>

@@ -120,7 +120,7 @@ class create_purchase_quotation_from_products(osv.osv):
     
     _columns = {
         'product_qty': fields.integer('Product quantity', required=True),
-        'supplier_id': fields.many2one('res.partner', 'Supplier', required=True),        
+        'supplier_id': fields.many2one('res.partner', 'Supplier', required=True),      
     }
     
     _defaults = {
